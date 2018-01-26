@@ -1,0 +1,61 @@
+{
+  "name": "skeeler-json-schema-draft-6",
+  "description": "JSON Schema Draft 6 plugin for Skeeler",
+  "version": "0.0.0",
+  "main": "lib/index",
+  "files": [
+    "*.md",
+    "lib"
+  ],
+  "scripts": {
+    "start": "yarn test --watchAll",
+    "test": "cross-env NODE_ENV=development jest --coverage",
+    "format": "prettier-eslint --write \"+(src|test)/**/*.js\"",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "prebuild": "rimraf lib",
+    "build": "babel src -d lib",
+    "preversion": "yarn test && yarn build"
+  },
+  "author": "cap32",
+  "repository": "Cap32/skeeler-json-schema-draft-6",
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "traverse": "^0.6.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.13.2",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-transform-es2015-destructuring": "^6.19.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-plugin-transform-es2015-parameters": "^6.18.0",
+    "babel-plugin-transform-es2015-spread": "^6.22.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.11.6",
+    "coveralls": "^3.0.0",
+    "cross-env": "^4.0.0",
+    "eslint": "^4.16.0",
+    "eslint-config-cantonjs": "^0.2.0",
+    "jest": "^20.0.4",
+    "prettier-eslint-cli": "^4.7.0",
+    "rimraf": "^2.5.4",
+    "skeeler": "^0.0.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "modulePathIgnorePatterns": [
+      "node_modules",
+      "lib"
+    ]
+  },
+  "peerDependencies": {
+    "skeeler": "^0.0.1"
+  }
+}
