@@ -101,4 +101,30 @@ describe('skeeler json schema draft 6', function () {
 			required: ['foo'],
 		});
 	});
+
+	test('multipleOf', function () {
+		const skeeler = new Skeeler({
+			foo: types.multipleOf(2),
+		});
+		expect(skeeler.export(name)).toEqual({
+			properties: {
+				foo: {
+					multipleOf: 2,
+				},
+			},
+		});
+	});
+
+	test('func', function () {
+		const skeeler = new Skeeler({
+			foo: types.func,
+		});
+		expect(skeeler.export(name)).toEqual({
+			properties: {
+				foo: {
+					instanceof: 'Function',
+				},
+			},
+		});
+	});
 });
