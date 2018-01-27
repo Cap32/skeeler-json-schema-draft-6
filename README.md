@@ -1,6 +1,7 @@
 # skeeler-json-schema-draft-6
 
 [![Build Status](https://travis-ci.org/Cap32/skeeler-json-schema-draft-6.svg?branch=master)](https://travis-ci.org/Cap32/skeeler-json-schema-draft-6)
+[![Coverage Status](https://coveralls.io/repos/github/Cap32/skeeler-json-schema-draft-6/badge.svg?branch=master)](https://coveralls.io/github/Cap32/skeeler-json-schema-draft-6?branch=master)
 
 [WIP] JSON Schema Draft 6 plugin for [Skeeler](https://github.com/Cap32/skeeler)
 
