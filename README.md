@@ -14,16 +14,22 @@ import SkeelerJSONSchemaDraftV6 from 'skeeler-json-schema-draft-6';
 const types = Skeeler.use('json', new SkeelerJSONSchemaDraftV6()).getTypes();
 
 const mySkeeler = new Skeeler({
-  foo: types.string.required.unique,
-  bar: types.number.index.exclusiveMinimum(0),
-  baz: types.objectId.required,
-  qux: types.array(types.string),
+  foo: types.string.required,
+  bar: types.number.exclusiveMinimum(0),
+  baz: types.anyOf([
+    types.object({
+      qux: types.number,
+      quux: types.boolean,
+    }),
+    types.enum(['corge', 'grault']),
+    types.array(types.string),
+  ]).required,
 });
 
 export default mySkeeler.export('json');
 ```
 
-### Equals to JSON Schema v6
+### Equals to JSON Schema Draft 6
 
 ```js
 export default {
@@ -35,12 +41,29 @@ export default {
       type: 'number',
       exclusiveMinimum: 0,
     },
-    baz: {},
-    qux: {
-      type: 'array',
-      items: {
-        type: 'string',
-      },
+    baz: {
+      anyOf: [
+        {
+          type: 'object',
+          properties: {
+            qux: {
+              type: 'number',
+            },
+            quux: {
+              type: 'boolean',
+            },
+          },
+        },
+        {
+          enum: ['corge', 'grault'],
+        },
+        {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+      ],
     },
   },
   required: ['foo', 'baz'],
