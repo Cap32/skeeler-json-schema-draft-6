@@ -12,6 +12,16 @@ export default {
 
 	required: setTrue,
 
+	$schema: setter,
+	$id: setter,
+	$ref: setter,
+	$data: setter,
+	$comment: setter,
+
+	type: setter,
+	enum: setter,
+	const: setter,
+
 	multipleOf: setter,
 	maximum: setter,
 	exclusiveMaximum: setter,
@@ -20,24 +30,43 @@ export default {
 	maxLength: setter,
 	minLength: setter,
 	pattern: setter,
+
 	additionalItems: setter,
 	maxItems: setter,
 	minItems: setter,
 	uniqueItems: setter,
+
 	contains: setter,
 	maxProperties: setter,
 	minProperties: setter,
 	properties: setter,
 	patternProperties: setter,
 	additionalProperties: setter,
+	dependencies: setter,
 	propertyNames: setter,
-	enum: setter,
-	const: setter,
-	type: setter,
+
+	if: setter,
+	then: setter,
+	else: setter,
+
 	anyOf: setter,
 	oneOf: setter,
 	allOf: setter,
 	not: setter,
+
+	format: setter,
+
+	contentEncoding: setter,
+	contentMediaType: setter,
+
+	definitions: setter,
+
+	title: setter,
+	description: setter,
+	default: setter,
+	readOnly: setter,
+	writeOnly: setter,
+	examples: setter,
 
 	instanceof: setter,
 	typeof: setter,
