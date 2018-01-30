@@ -31,6 +31,7 @@ export default {
 	minLength: setter,
 	pattern: setter,
 
+	items: setter,
 	additionalItems: setter,
 	maxItems: setter,
 	minItems: setter,
