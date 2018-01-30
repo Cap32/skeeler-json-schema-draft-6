@@ -123,7 +123,7 @@ const skeeler = new Skeeler({
     foo: types.string,
     bar: types.number,
   },
-  required(['foo', 'bar']),
+  required: ['foo', 'bar'],
 });
 const options = { strict: true };
 skeeler.export('json', options);
@@ -139,6 +139,19 @@ skeeler.export('json', options);
  *  required: ['foo', 'bar'],
  * }
  */
+```
+
+Or
+
+```js
+const skeeler = new Skeeler(
+  types.properties({
+    foo: types.string,
+    bar: types.number,
+  }).required(['foo', 'bar'])
+);
+const options = { strict: true };
+skeeler.export('json', options);
 ```
 
 <a name="related-projects"></a>
