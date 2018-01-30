@@ -8,6 +8,14 @@ describe('skeeler json schema draft 6', function () {
 	describe('not strict mode', function () {
 		const options = {};
 
+		test('data and option are optional', function () {
+			const skeeler = new Skeeler();
+			expect(skeeler.export(name)).toEqual({
+				properties: {},
+				type: 'object',
+			});
+		});
+
 		test('string', function () {
 			const skeeler = new Skeeler({
 				foo: types.string,
