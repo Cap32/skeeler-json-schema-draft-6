@@ -6,7 +6,7 @@ describe('skeeler json schema draft 6', function () {
 	const types = Skeeler.use(name, new SkeelerJSONSchemaDraftV6()).getTypes();
 
 	describe('not strict mode', function () {
-		const options = { strict: false };
+		const options = {};
 
 		test('string', function () {
 			const skeeler = new Skeeler({
@@ -14,6 +14,7 @@ describe('skeeler json schema draft 6', function () {
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'string' } },
+				type: 'object',
 			});
 		});
 
@@ -23,6 +24,7 @@ describe('skeeler json schema draft 6', function () {
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'number' } },
+				type: 'object',
 			});
 		});
 
@@ -32,6 +34,7 @@ describe('skeeler json schema draft 6', function () {
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'boolean' } },
+				type: 'object',
 			});
 		});
 
@@ -41,6 +44,7 @@ describe('skeeler json schema draft 6', function () {
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'null' } },
+				type: 'object',
 			});
 		});
 
@@ -50,6 +54,7 @@ describe('skeeler json schema draft 6', function () {
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'any' } },
+				type: 'object',
 			});
 		});
 
@@ -59,15 +64,27 @@ describe('skeeler json schema draft 6', function () {
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'array' } },
+				type: 'object',
 			});
 		});
 
-		test('array()', function () {
+		test('array and items', function () {
+			const skeeler = new Skeeler({
+				foo: types.array.items(types.string),
+			});
+			expect(skeeler.export(name, options)).toEqual({
+				properties: { foo: { type: 'array', items: { type: 'string' } } },
+				type: 'object',
+			});
+		});
+
+		test('array(items)', function () {
 			const skeeler = new Skeeler({
 				foo: types.array(types.string),
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'array', items: { type: 'string' } } },
+				type: 'object',
 			});
 		});
 
@@ -77,10 +94,25 @@ describe('skeeler json schema draft 6', function () {
 			});
 			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'object' } },
+				type: 'object',
 			});
 		});
 
-		test('object()', function () {
+		test('object and properties', function () {
+			const skeeler = new Skeeler({
+				foo: types.object.properties({
+					bar: types.string,
+				}),
+			});
+			expect(skeeler.export(name, options)).toEqual({
+				properties: {
+					foo: { type: 'object', properties: { bar: { type: 'string' } } },
+				},
+				type: 'object',
+			});
+		});
+
+		test('object(properties)', function () {
 			const skeeler = new Skeeler({
 				foo: types.object({
 					bar: types.string,
@@ -90,6 +122,7 @@ describe('skeeler json schema draft 6', function () {
 				properties: {
 					foo: { type: 'object', properties: { bar: { type: 'string' } } },
 				},
+				type: 'object',
 			});
 		});
 
@@ -102,6 +135,7 @@ describe('skeeler json schema draft 6', function () {
 					foo: {},
 				},
 				required: ['foo'],
+				type: 'object',
 			});
 		});
 
@@ -115,6 +149,7 @@ describe('skeeler json schema draft 6', function () {
 						multipleOf: 2,
 					},
 				},
+				type: 'object',
 			});
 		});
 
@@ -128,6 +163,7 @@ describe('skeeler json schema draft 6', function () {
 						instanceof: 'Function',
 					},
 				},
+				type: 'object',
 			});
 		});
 
@@ -141,32 +177,47 @@ describe('skeeler json schema draft 6', function () {
 			).toEqual({
 				title: 'other option',
 				properties: {},
+				type: 'object',
 			});
 		});
 	});
 
 	describe('strict mode', function () {
+		const options = { strict: true };
+
 		test('properties', function () {
+			const skeeler = new Skeeler(
+				types.object.properties({
+					foo: types.string,
+				}),
+			);
+			expect(skeeler.export(name, options)).toEqual({
+				properties: { foo: { type: 'string' } },
+				type: 'object',
+			});
+		});
+
+		test('native properties', function () {
 			const skeeler = new Skeeler({
 				properties: {
 					foo: types.string,
 				},
 			});
-
-			expect(skeeler.export(name)).toEqual({
+			expect(skeeler.export(name, options)).toEqual({
 				properties: { foo: { type: 'string' } },
 			});
 		});
 
 		test('required()', function () {
-			const skeeler = new Skeeler({
-				properties: {
-					foo: types.string,
-					bar: types.number,
-				},
-				required: ['foo', 'bar'],
-			});
-			expect(skeeler.export(name)).toEqual({
+			const skeeler = new Skeeler(
+				types
+					.properties({
+						foo: types.string,
+						bar: types.number,
+					})
+					.required(['foo', 'bar']),
+			);
+			expect(skeeler.export(name, options)).toEqual({
 				properties: {
 					foo: { type: 'string' },
 					bar: { type: 'number' },
@@ -179,6 +230,7 @@ describe('skeeler json schema draft 6', function () {
 			const skeeler = new Skeeler({});
 			expect(
 				skeeler.export(name, {
+					...options,
 					other: { title: 'other option' },
 				}),
 			).toEqual({

@@ -1,7 +1,7 @@
 import traverse from 'traverse';
 
 export default function compile(data, options = {}) {
-	const { strict = true, other } = options;
+	const { strict = false, other } = options;
 
 	if (!strict) {
 		const trav = traverse({ properties: data });
@@ -27,6 +27,7 @@ export default function compile(data, options = {}) {
 				this.parent.parent.parent.node.required = required;
 			}
 		});
+		data.type = 'object';
 	}
 
 	return { ...data, ...other };
