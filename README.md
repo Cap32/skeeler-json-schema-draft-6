@@ -154,7 +154,7 @@ skeeler.export('json', options);
 
 ## Keywords
 
-[keywords.js](/blob/master/src/keywords.js)
+[keywords.js](/src/keywords.js)
 
 ## Related projects
 
