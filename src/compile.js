@@ -1,7 +1,7 @@
 import traverse from 'traverse';
 
 export default function compile(data, options = {}) {
-	const { strict = false, other } = options;
+	const { strict = false, rootProps } = options;
 
 	if (!strict) {
 		const trav = traverse({ properties: data });
@@ -40,5 +40,5 @@ export default function compile(data, options = {}) {
 		data.type = 'object';
 	}
 
-	return { ...data, ...other };
+	return { ...data, ...rootProps };
 }

@@ -190,15 +190,15 @@ describe('skeeler json schema draft 6', function () {
 			});
 		});
 
-		test('`other` option', function () {
+		test('`rootProps` option', function () {
 			const skeeler = new Skeeler({});
 			expect(
 				skeeler.export(name, {
 					...options,
-					other: { title: 'other option' },
+					rootProps: { title: 'rootProps option' },
 				}),
 			).toEqual({
-				title: 'other option',
+				title: 'rootProps option',
 				properties: {},
 				type: 'object',
 			});
@@ -271,15 +271,15 @@ describe('skeeler json schema draft 6', function () {
 			});
 		});
 
-		test('`other` option', function () {
+		test('`rootProps` option', function () {
 			const skeeler = new Skeeler({});
 			expect(
 				skeeler.export(name, {
 					...options,
-					other: { title: 'other option' },
+					rootProps: { title: 'rootProps option' },
 				}),
 			).toEqual({
-				title: 'other option',
+				title: 'rootProps option',
 			});
 		});
 	});

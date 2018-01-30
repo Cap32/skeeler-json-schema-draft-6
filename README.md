@@ -9,15 +9,15 @@
 
 <!-- MarkdownTOC -->
 
-* [Simple Example](#simple-example)
-  * [Equals to JSON Schema Draft 6](#equals-to-json-schema-draft-6)
-* [Options](#options)
-* [Related projects](#related-projects)
-* [License](#license)
+- [Simple Example](#simple-example)
+- [Options](#options)
+  - [`rootProps` option](#rootprops-option)
+  - [`strict` option](#strict-option)
+- [Keywords](#keywords)
+- [Related projects](#related-projects)
+- [License](#license)
 
 <!-- /MarkdownTOC -->
-
-<a name="simple-example"></a>
 
 ## Simple Example
 
@@ -43,9 +43,7 @@ const mySkeeler = new Skeeler({
 export default mySkeeler.export('json');
 ```
 
-<a name="equals-to-json-schema-draft-6"></a>
-
-### Equals to JSON Schema Draft 6
+##### Equals to JSON Schema Draft 6
 
 ```js
 export default {
@@ -87,21 +85,19 @@ export default {
 };
 ```
 
-<a name="options"></a>
-
 ## Options
 
 By default, all the schema definitions will be compiled to `properties` in JSON schema, and the root type is `object`.
 
-#### `other` option
+### `rootProps` option
 
-If you want to pass some attributes outside `properties`, you may use `other` option.
+If you want to pass some attributes outside `properties`, you may use `rootProps` option.
 
 ###### Example
 
 ```js
 const skeeler = new Skeeler({});
-const options = { other: { title: 'awesome' } };
+const options = { rootProps: { title: 'awesome' } };
 skeeler.export('json', options);
 
 /**
@@ -111,7 +107,7 @@ skeeler.export('json', options);
  */
 ```
 
-#### `strict` option
+### `strict` option
 
 If you want to writing in native JSON Schema way, you may use `strict` option.
 
@@ -141,26 +137,28 @@ skeeler.export('json', options);
  */
 ```
 
-Or
+###### Or
 
 ```js
 const skeeler = new Skeeler(
-  types.properties({
-    foo: types.string,
-    bar: types.number,
-  }).required(['foo', 'bar'])
+  types
+    .properties({
+      foo: types.string,
+      bar: types.number,
+    })
+    .required(['foo', 'bar']),
 );
 const options = { strict: true };
 skeeler.export('json', options);
 ```
 
-<a name="related-projects"></a>
+## Keywords
+
+[keywords.js](/blob/master/src/keywords.js)
 
 ## Related projects
 
 * [Skeeler](https://github.com/Cap32/skeeler)
-
-<a name="license"></a>
 
 ## License
 
