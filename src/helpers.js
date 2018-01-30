@@ -16,7 +16,7 @@ export const object = function object(ctx, properties) {
 	}
 };
 
-export const setTrue = function setTrue(ctx, val = true) {
+export const required = function required(ctx, val = true) {
 	ctx.state[ctx.key] = val;
 };
 

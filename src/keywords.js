@@ -1,4 +1,4 @@
-import { type, array, object, setTrue, setter, func } from './helpers';
+import { type, array, object, required, setter, func } from './helpers';
 
 export default {
 	string: type,
@@ -10,7 +10,7 @@ export default {
 	array,
 	object,
 
-	required: setTrue,
+	required,
 
 	$schema: setter,
 	$id: setter,
