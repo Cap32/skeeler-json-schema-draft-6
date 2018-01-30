@@ -19,6 +19,7 @@
   - [object\(\)](#object)
   - [required](#required)
   - [dependencies](#dependencies)
+  - [func](#func)
 - [Related projects](#related-projects)
 - [License](#license)
 
@@ -159,7 +160,9 @@ skeeler.export('json', options);
 
 ## Keywords
 
-[keywords.js](/src/keywords.js)
+Please checkout [keywords.js](/src/keywords.js)
+
+This plugin is friendly to [ajv](https://github.com/epoberezkin/ajv) and supports all [ajv keywords](https://github.com/epoberezkin/ajv-keywords)
 
 ## Syntactic Sugars
 
@@ -187,7 +190,7 @@ will be compiled to
 
 `{ properties: { foo: {}, bar: {} }, required: ['foo', 'bar'] }`
 
-**Only work when `strict` option is NOT `true`**
+_NOTE: Only work when `strict` option is NOT `true`_
 
 ### dependencies
 
@@ -197,7 +200,17 @@ will be compiled to
 
 `{ properties: { foo: {} }, dependencies: { foo: ['bar'] } }`
 
-**Only work when `strict` option is NOT `true`**
+_NOTE: Only work when `strict` option is NOT `true`_
+
+### func
+
+`types.func`
+
+equals to
+
+`types.instanceof('Function')`
+
+_NOTE: `instanceof` is a custom keyword for [ajv](https://github.com/epoberezkin/ajv)_
 
 ## Related projects
 
