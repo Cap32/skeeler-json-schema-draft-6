@@ -5,27 +5,37 @@ export default function compile(data, options = {}) {
 
 	if (!strict) {
 		const trav = traverse({ properties: data });
-		data = trav.map(function (val) {
-			if (
-				!Array.isArray(val) &&
-				this.key === 'required' &&
-				this.parent &&
-				this.parent.parent &&
-				this.parent.parent.parent &&
-				this.parent.parent.key === 'properties'
-			) {
-				this.remove();
-				const required = trav.get('required') || [];
-				const { key } = this.parent;
 
+		data = trav.map(function (val) {
+			const hoist = (prop, defaults, handler) => {
+				if (
+					this.key === prop &&
+					this.parent &&
+					this.parent.parent &&
+					this.parent.parent.parent &&
+					this.parent.parent.key === 'properties'
+				) {
+					this.remove();
+					let target = trav.get(prop) || defaults;
+					const { key } = this.parent;
+					target = handler(target, key);
+					trav.set(prop, target);
+					this.parent.parent.parent.node[prop] = target;
+				}
+			};
+
+			hoist('required', [], (required, key) => {
 				/* istanbul ignore else */
 				if (!~required.indexOf(key)) {
 					required.push(key);
 				}
+				return required;
+			});
 
-				trav.set('required', required);
-				this.parent.parent.parent.node.required = required;
-			}
+			hoist('dependencies', {}, (dependencies, key) => {
+				dependencies[key] = val;
+				return dependencies;
+			});
 		});
 		data.type = 'object';
 	}

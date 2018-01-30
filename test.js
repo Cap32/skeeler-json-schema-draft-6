@@ -147,6 +147,21 @@ describe('skeeler json schema draft 6', function () {
 			});
 		});
 
+		test('dependencies', function () {
+			const skeeler = new Skeeler({
+				foo: types.dependencies(['bar']),
+			});
+			expect(skeeler.export(name, options)).toEqual({
+				properties: {
+					foo: {},
+				},
+				dependencies: {
+					foo: ['bar'],
+				},
+				type: 'object',
+			});
+		});
+
 		test('multipleOf', function () {
 			const skeeler = new Skeeler({
 				foo: types.multipleOf(2),
@@ -231,6 +246,28 @@ describe('skeeler json schema draft 6', function () {
 					bar: { type: 'number' },
 				},
 				required: ['foo', 'bar'],
+			});
+		});
+
+		test('dependencies()', function () {
+			const skeeler = new Skeeler(
+				types
+					.properties({
+						foo: types.string,
+						bar: types.number,
+					})
+					.dependencies({
+						foo: ['bar'],
+					}),
+			);
+			expect(skeeler.export(name, options)).toEqual({
+				properties: {
+					foo: { type: 'string' },
+					bar: { type: 'number' },
+				},
+				dependencies: {
+					foo: ['bar'],
+				},
 			});
 		});
 
