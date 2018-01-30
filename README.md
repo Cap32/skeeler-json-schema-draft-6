@@ -14,6 +14,11 @@
   - [`rootProps` option](#rootprops-option)
   - [`strict` option](#strict-option)
 - [Keywords](#keywords)
+- [Syntactic Sugars](#syntactic-sugars)
+  - [array\(\)](#array)
+  - [object\(\)](#object)
+  - [required](#required)
+  - [dependencies](#dependencies)
 - [Related projects](#related-projects)
 - [License](#license)
 
@@ -155,6 +160,40 @@ skeeler.export('json', options);
 ## Keywords
 
 [keywords.js](/src/keywords.js)
+
+## Syntactic Sugars
+
+### array()
+
+`types.array(types.string)`
+
+equals to
+
+`types.array.items(types.string)`
+
+### object()
+
+`types.object({ foo: types.string })`
+
+equals to
+
+`types.object.properties({ foo: types.string })`
+
+### required
+
+`{ foo: types.required, bar: types.required }`
+
+will be compiled to
+
+`{ properties: { foo: {}, bar: {} }, required: ['foo', 'bar'] }`
+
+### dependencies
+
+`{ foo: types.dependencies(['bar']) }`
+
+will be compiled to
+
+`{ properties: { foo: {} }, dependencies: { foo: ['bar'] } }`
 
 ## Related projects
 
