@@ -15,7 +15,6 @@ export default {
 	$schema: setter,
 	$id: setter,
 	$ref: setter,
-	$data: setter,
 	$comment: setter,
 
 	type: setter,
@@ -69,8 +68,30 @@ export default {
 	writeOnly: setter,
 	examples: setter,
 
+	$data: setter, // https://github.com/json-schema/json-schema/wiki/$data-(v5-proposal)
+	$merge: setter, // https://tools.ietf.org/html/rfc7396
+	$patch: setter, // https://tools.ietf.org/html/rfc6902
+
+	// Custom JSON-Schema keywords for Ajv validator https://github.com/epoberezkin/ajv-keywords
 	instanceof: setter,
 	typeof: setter,
+	range: setter,
+	exclusiveRange: setter,
+	switch: setter,
+	continue: setter,
+	select: setter,
+	selectCases: setter,
+	selectDefault: setter,
+	patternRequired: setter,
+	deepProperties: setter,
+	deepRequired: setter,
+	uniqueItemProperties: setter,
+	regexp: setter,
+	formatMaximum: setter,
+	formatMinimum: setter,
+	formatExclusiveMaximum: setter,
+	formatExclusiveMinimum: setter,
+	dynamicDefaults: setter,
 
 	func,
 };
