@@ -187,6 +187,8 @@ will be compiled to
 
 `{ properties: { foo: {}, bar: {} }, required: ['foo', 'bar'] }`
 
+**Only work when `strict` option is NOT `true`**
+
 ### dependencies
 
 `{ foo: types.dependencies(['bar']) }`
@@ -194,6 +196,8 @@ will be compiled to
 will be compiled to
 
 `{ properties: { foo: {} }, dependencies: { foo: ['bar'] } }`
+
+**Only work when `strict` option is NOT `true`**
 
 ## Related projects
 
