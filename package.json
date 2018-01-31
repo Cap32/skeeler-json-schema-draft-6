@@ -44,7 +44,7 @@
     "jest": "^20.0.4",
     "prettier-eslint-cli": "^4.7.0",
     "rimraf": "^2.5.4",
-    "skeeler": "^0.0.1"
+    "skeeler": "^0.1.0"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -56,6 +56,6 @@
     ]
   },
   "peerDependencies": {
-    "skeeler": "^0.0.1"
+    "skeeler": "^0.1.0"
   }
 }
